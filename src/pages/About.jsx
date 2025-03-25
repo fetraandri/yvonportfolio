@@ -38,7 +38,8 @@ const About = () => {
 
           {/* Qualités avec diagrammes circulaires */}
           <div>
-            <ScrollFloat textClassName="font-semibold md:text-2xl  text-gray-800 ">
+            <ScrollFloat textClassName="font-semibold  md:text-2xl  text-gray-800  "
+            containerClassName="text-primary text-center mb-10">
               Mes qualités
             </ScrollFloat>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

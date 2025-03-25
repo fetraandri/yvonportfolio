@@ -2,48 +2,80 @@ import { useState } from 'react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState(null);
 
   const navItems = [
     { name: 'Accueil', href: '#home' },
     { name: 'À propos', href: '#about' },
-    { name: 'Expériences', href: '#experiences' }, // Vérifie que c'est bien #experiences
+    { name: 'Expériences', href: '#experiences' },
     { name: 'Contact', href: '#contact' },
   ];
 
   const handleScroll = (e, href) => {
     e.preventDefault();
-    console.log('Scrolling to:', href); // Ajout pour déboguer
     const target = document.querySelector(href);
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-      console.log('Target found:', target); // Vérifie si la cible existe
-    } else {
-      console.error('Target not found for:', href); // Affiche si la cible est introuvable
+      const offset = 64; // Hauteur du Navbar
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
     }
     setIsOpen(false);
   };
 
+  const handleItemClick = (name) => {
+    setActiveItem(name);
+  };
+
   return (
-    <nav className="fixed top-0 left-0 w-full bg-primary text-white shadow-lg z-50">
+    <nav className="fixed top-0 left-0 w-full bg-primary text-white shadow-lg z-50 font-montserrat">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
+          {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="#home" className="text-2xl font-bold">
+            <a
+              href="#home"
+              className="text-2xl font-bold text-white"
+              onClick={(e) => handleScroll(e, '#home')}
+            >
               Mon Portfolio
             </a>
           </div>
+
+          {/* Menu Desktop */}
           <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleScroll(e, item.href)}
-                className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md transition duration-300"
-              >
-                {item.name}
-              </a>
-            ))}
+            <ul className="flex items-center gap-4">
+              {navItems.map((item) => (
+                <li
+                  key={item.name}
+                  className={`relative rounded-lg group ${
+                    activeItem === item.name ? 'active' : ''
+                  }`}
+                  onClick={() => handleItemClick(item.name)}
+                >
+                  <a
+                    href={item.href}
+                    onClick={(e) => handleScroll(e, item.href)}
+                    className="relative block px-8 py-2 text-white uppercase font-bold text-sm hover:text-gray-200 transition-colors z-10"
+                  >
+                    {item.name}
+                  </a>
+                  {/* Barres animées avant/après */}
+                  <span
+                    className={`absolute left-1/2 transform -translate-x-1/2 top-0 h-0.5 bg-white w-0 group-hover:w-1/4 transition-all duration-500 ease-[cubic-bezier(0.4,-1,0.2,-1)] ${
+                      activeItem === item.name ? '!w-full !h-1' : ''
+                    } rounded-t-md z-0`}
+                  ></span>
+                  <span
+                    className={`absolute left-1/2 transform -translate-x-1/2 bottom-0 h-0.5 bg-white w-0 group-hover:w-1/4 transition-all duration-500 ease-[cubic-bezier(0.4,-1,0.2,-1)] ${
+                      activeItem === item.name ? '!w-full !h-1' : ''
+                    } rounded-b-md z-0`}
+                  ></span>
+                </li>
+              ))}
+            </ul>
           </div>
+
+          {/* Bouton Mobile */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -60,20 +92,40 @@ const Navbar = () => {
             </button>
           </div>
         </div>
+
+        {/* Menu Mobile */}
         {isOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-primary">
+            <ul className="px-2 pt-2 pb-3 space-y-1 bg-primary">
               {navItems.map((item) => (
-                <a
+                <li
                   key={item.name}
-                  href={item.href}
-                  onClick={(e) => handleScroll(e, item.href)}
-                  className="block text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md transition duration-300"
+                  className={`relative rounded-lg group ${
+                    activeItem === item.name ? 'active' : ''
+                  }`}
+                  onClick={() => handleItemClick(item.name)}
                 >
-                  {item.name}
-                </a>
+                  <a
+                    href={item.href}
+                    onClick={(e) => handleScroll(e, item.href)}
+                    className="relative block px-8 py-2 text-white uppercase font-bold text-sm hover:text-gray-200 transition-colors z-10"
+                  >
+                    {item.name}
+                  </a>
+                  {/* Barres animées avant/après */}
+                  <span
+                    className={`absolute left-1/2 transform -translate-x-1/2 top-0 h-0.5 bg-white w-0 group-hover:w-1/4 transition-all duration-500 ease-[cubic-bezier(0.4,-1,0.2,-1)] ${
+                      activeItem === item.name ? '!w-full !h-1' : ''
+                    } rounded-t-md z-0`}
+                  ></span>
+                  <span
+                    className={`absolute left-1/2 transform -translate-x-1/2 bottom-0 h-0.5 bg-white w-0 group-hover:w-1/4 transition-all duration-500 ease-[cubic-bezier(0.4,-1,0.2,-1)] ${
+                      activeItem === item.name ? '!w-full !h-1' : ''
+                    } rounded-b-md z-0`}
+                  ></span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         )}
       </div>

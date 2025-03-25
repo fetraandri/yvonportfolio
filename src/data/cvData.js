@@ -7,8 +7,8 @@ const cvData = {
     contact: {
       phone1: "+261 34 43 284 04",
       phone2: "+261 32 35 477 81",
-      email: "yvontahari@gmail.com",
-      address: "Lot ILE 36CVJ Ambolidahy - Ankadindramamy",
+      email: "yvonrahari@gmail.com",
+      address: "Lot IIE 36CVJ Ambolidahy - Ankadindramamy",
     },
     education: [
       {

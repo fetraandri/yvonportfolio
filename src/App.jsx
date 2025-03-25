@@ -27,7 +27,7 @@ function App() {
             <Contact />
           </main>
           <footer className="bg-gray-800 text-white py-4 text-center">
-            <p>© 2025 Mon Portfolio. Tous droits réservés.</p>
+            <p>© 2025 YvonRaharijantovo. Tous droits réservés.</p>
           </footer>
         </div>
       )}
