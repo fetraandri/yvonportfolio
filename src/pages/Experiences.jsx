@@ -4,8 +4,8 @@ import ExperienceCard from '../components/ui/ExperienceCard';
 import ScrollFloat from '../components/ui/ScrollFloat';
 
 const logos = {
-  "Konecta Madagascar": "/src/assets/logos/konekta.jpg",
-  "Copscall (Ambohijanahary-Ambohibao)": "/src/assets/logos/copscall.jpg",
+  "Konecta Madagascar": "/logos/konekta.jpg",
+  "Copscall (Ambohijanahary-Ambohibao)": "/logos/copscall.jpg",
 };
 
 const Experiences = () => {
@@ -43,7 +43,7 @@ const Experiences = () => {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/src/assets/images/konekta.jpg')`,
+          backgroundImage: `url('/images/konekta.jpg')`,
           opacity: 0.2,
           zIndex: 0,
         }}
