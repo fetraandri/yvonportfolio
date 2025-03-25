@@ -1,50 +1,45 @@
+import { useRef } from 'react';
 import cvData from '../data/cvData';
+import VariableProximity from '../components/ui/VariableProximity';
 
 const Home = () => {
+  const containerRef = useRef(null); // Référence au conteneur pour l'animation
+
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-200"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-200 py-8"
     >
-      <div className="max-w-4xl mx-auto px-4 text-center">
-        {/* Titre principal */}
-        <h1 className="text-5xl md:text-6xl font-bold text-primary mb-4">
-          {cvData.fullName}
-        </h1>
-
-        {/* Sous-titre (métier) */}
-        <h2 className="text-2xl md:text-3xl text-gray-700 mb-6">
-          {cvData.jobTitle}
-        </h2>
-
-        {/* Description courte */}
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-          {cvData.profile}
-        </p>
-
-        {/* Boutons d'action */}
-        <div className="flex justify-center gap-4">
-          <a
-            href="#contact"
-            className="inline-block bg-primary text-white py-3 px-6 rounded-lg hover:bg-secondary transition duration-300"
-          >
-            Me contacter
-          </a>
-          <a
-            href="#projects"
-            className="inline-block border-2 border-primary text-primary py-3 px-6 rounded-lg hover:bg-primary hover:text-white transition duration-300"
-          >
-            Voir mes expériences
-          </a>
+      <div
+        ref={containerRef}
+        className="w-full max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-6 lg:gap-12"
+      >
+        {/* Section gauche : Image de profil très grande */}
+        <div className="w-full lg:w-2/3 h-[50vh] lg:h-[80vh] flex justify-center lg:justify-start">
+          <img
+            src={cvData.profileImage}
+            alt="Profil de Yvon Raharinjatovo"
+            className="w-full h-full object-cover" // Image sans bordures rondes
+          />
         </div>
 
-        {/* Informations de contact rapide */}
-        <div className="mt-10 flex flex-col md:flex-row justify-center gap-6 text-gray-700">
-          <p className="flex items-center gap-2">
-            <span className="text-primary">📞</span> {cvData.contact.phone1}
-          </p>
-          <p className="flex items-center gap-2">
-            <span className="text-primary">✉️</span> {cvData.contact.email}
+        {/* Section droite : Titre et description */}
+        <div className="w-full lg:w-1/3 flex flex-col justify-center text-center lg:text-left">
+          {/* Titre principal avec animation */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary mb-4 lg:mb-6">
+            <VariableProximity
+              label={cvData.fullName}
+              fromFontVariationSettings='"wght" 400'
+              toFontVariationSettings='"wght" 900'
+              containerRef={containerRef}
+              radius={100}
+              falloff="gaussian"
+            />
+          </h1>
+
+          {/* Description courte avec effet zoomOut et texte justifié */}
+          <p className="text-base sm:text-lg text-gray-600 mb-8 animate-zoomOut text-justify">
+            {cvData.profile}
           </p>
         </div>
       </div>
