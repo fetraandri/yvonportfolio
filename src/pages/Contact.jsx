@@ -1,23 +1,25 @@
+import ScrollFloat from '../components/ui/ScrollFloat';
+import cvData from '../data/cvData';
+
 const Contact = () => {
-    return (
-      <section
-        id="contact"
-        className="min-h-screen flex items-center justify-center bg-white"
-      >
-        <div className="max-w-md mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-primary mb-6">Contact</h2>
-          <p className="text-gray-700 mb-4">
-            N'hésitez pas à me contacter pour toute opportunité ou question !
-          </p>
-          <a
-            href="mailto:tonemail@example.com"
-            className="inline-block bg-primary text-white py-2 px-4 rounded hover:bg-secondary transition"
-          >
-            Envoyer un email
-          </a>
+  return (
+    <section id="contact" className="min-h-screen py-16 bg-gray-100 flex items-center justify-center">
+      <div className="max-w-5xl mx-auto px-4 text-center">
+        <ScrollFloat
+          containerClassName="text-primary"
+          textClassName="font-bold"
+        >
+          Contactez-moi
+        </ScrollFloat>
+        <div className="mt-8 space-y-4">
+          <p className="text-lg text-gray-600">{cvData.contact.phone1}</p>
+          <p className="text-lg text-gray-600">{cvData.contact.phone2}</p>
+          <p className="text-lg text-gray-600">{cvData.contact.email}</p>
+          <p className="text-lg text-gray-600">{cvData.contact.address}</p>
         </div>
-      </section>
-    );
-  };
-  
-  export default Contact;
+      </div>
+    </section>
+  );
+};
+
+export default Contact;

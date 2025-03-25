@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import cvData from '../data/cvData';
 import ExperienceCard from '../components/ui/ExperienceCard';
+import ScrollFloat from '../components/ui/ScrollFloat';
 
-// Chemins des logos (ajuste selon tes fichiers réels)
 const logos = {
   "Konecta Madagascar": "/src/assets/logos/konekta.jpg",
   "Copscall (Ambohijanahary-Ambohibao)": "/src/assets/logos/copscall.jpg",
@@ -10,6 +10,8 @@ const logos = {
 
 const Experiences = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % cvData.experience.length);
@@ -19,26 +21,47 @@ const Experiences = () => {
     setCurrentIndex((prev) => (prev - 1 + cvData.experience.length) % cvData.experience.length);
   };
 
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const diffX = touchStartX.current - touchEndX.current;
+    if (diffX > 50) nextSlide();
+    else if (diffX < -50) prevSlide();
+  };
+
   return (
     <section
       id="experiences"
       className="min-h-screen py-16 bg-gray-50 flex items-center justify-center relative overflow-hidden"
     >
-      {/* Pseudo-élément pour l'image de fond */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/src/assets/images/konekta.jpg')`, // Ajuste le chemin
-          opacity: 0.5, // Faible opacité
+          backgroundImage: `url('/src/assets/images/konekta.jpg')`,
+          opacity: 0.2,
           zIndex: 0,
         }}
       ></div>
-
-      {/* Contenu principal */}
-      <div className="max-w-6xl mx-auto px-4 text-center relative z-10"> {/* z-10 pour rester au-dessus */}
-        <h2 className="text-4xl md:text-6xl font-bold text-primary mb-16">Mes expériences</h2>
+      <div className="max-w-6xl mx-auto px-4 text-center relative z-10">
+        <ScrollFloat
+          containerClassName="text-primary"
+          textClassName="font-bold"
+        >
+          Mes expériences
+        </ScrollFloat>
         <div className="relative">
-          <div className="overflow-hidden">
+          <div
+            className="overflow-hidden touch-pan-x"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <div
               className="flex transition-transform duration-700 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -57,13 +80,13 @@ const Experiences = () => {
           </div>
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-primary text-white p-3 rounded-full hover:bg-blue-700 transition text-2xl"
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-primary text-white p-4 rounded-full hover:bg-blue-700 transition text-2xl md:p-3"
           >
             ←
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-primary text-white p-3 rounded-full hover:bg-blue-700 transition text-2xl"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary text-white p-4 rounded-full hover:bg-blue-700 transition text-2xl md:p-3"
           >
             →
           </button>

@@ -1,5 +1,6 @@
 import cvData from '../data/cvData';
 import CircularProgress from '../components/ui/CircularProgress';
+import ScrollFloat from '../components/ui/ScrollFloat';
 
 const About = () => {
   const qualityPercentages = {
@@ -15,16 +16,21 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-12">
         {/* Titre à gauche */}
         <div className="lg:w-1/3 flex items-center justify-center">
-          <h2 className="text-5xl md:text-7xl font-bold text-primary writing-mode-vertical-rl transform ">
+          <ScrollFloat
+            containerClassName="text-primary"
+            textClassName="font-bold text-5xl md:text-6xl writing-mode-vertical-rl"
+          >
             À propos de moi
-          </h2>
+          </ScrollFloat>
         </div>
 
         {/* Contenu à droite */}
         <div className="lg:w-2/3 space-y-12">
           {/* Profil */}
           <div>
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">Qui suis-je ?</h3>
+            <ScrollFloat textClassName="font-semibold md:text-2xl text-gray-800">
+              Qui suis-je ?
+            </ScrollFloat>
             <p className="text-lg text-gray-600 text-justify leading-relaxed">
               Fort d’une solide formation en sociologie et d’une expérience variée dans la gestion de la relation client, je suis un professionnel dédié à l’amélioration des processus et à la création de liens durables entre les entreprises et leurs partenaires. Mon parcours m’a permis de développer une approche analytique et humaine, toujours orientée vers des résultats concrets.
             </p>
@@ -32,7 +38,9 @@ const About = () => {
 
           {/* Qualités avec diagrammes circulaires */}
           <div>
-            <h3 className="text-2xl font-semibold text-gray-800 mb-6">Mes qualités</h3>
+            <ScrollFloat textClassName="font-semibold md:text-2xl  text-gray-800 ">
+              Mes qualités
+            </ScrollFloat>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {cvData.qualities.map((quality, index) => (
                 <CircularProgress
