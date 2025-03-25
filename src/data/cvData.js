@@ -3,7 +3,7 @@ const cvData = {
     jobTitle: "Télé-conseiller | Télé-prospecteur | Apporteur d’affaires",
     profile:
       "Professionnel polyvalent et rigoureux, je combine une expertise en gestion de la qualité, télévente et prospection, ainsi qu’une solide expérience en relation client et développement commercial. Mon parcours démontre ma capacité à relever des défis variés et à m’adapter aux besoins de chaque rôle. En tant que Responsable Qualité, j’ai su instaurer des processus efficients, favorisant une amélioration continue des standards. Mon expérience en tant que téléconseiller et télévendeur a renforcé ma maîtrise des techniques de communication et de négociation, tout en développant une approche centrée sur la satisfaction client. Ces atouts sont renforcés par mon rôle d’Assistant Technique, Apporteur d’Affaires et Commercial, où j’ai excellé dans l’identification d’opportunités et l’élargissement des réseauxé",
-      profileImage: "/src/assets/images/yvonprofil.jpeg",
+      profileImage: "/images/yvonprofil.jpeg",
     contact: {
       phone1: "+261 34 43 284 04",
       phone2: "+261 32 35 477 81",
